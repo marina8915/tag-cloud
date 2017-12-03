@@ -19,11 +19,12 @@ for (var i = 0; i < tags.length; i++) {
 tagCloud.onclick = function (el) {
     var elem = el.target || event.srcElement
     //display del
-    var id = -elem.id
-    if (isNaN(id)) {
-        if (elem.querySelector('i').style.display === 'inline-block') {
-            elem.querySelector('i').style.display = 'none'
-        } else {
+    if (isNaN(elem.id)) {
+        var delList = document.getElementById('tagCloud').getElementsByTagName('i')
+        for (var i = 0; i < delList.length; i++) {
+            delList[i].style.display = 'none'
+        }
+        if (elem.id !== 'tagCloud') {
             elem.querySelector('i').style.display = 'inline-block'
         }
     }
