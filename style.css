@@ -75,10 +75,20 @@ body {
 li {
     position: absolute;
     display: inline-block;
-    padding: 5px 15px;
+    padding: 5px 10px;
     border: 1px solid #001100;
     border-radius: 5px;
     background-color: rgba(34, 34, 34, .30);
     opacity: .9;
     white-space: nowrap;
+}
+
+i {
+    display: none;
+    height: 16px;
+    width: 16px;
+    margin-left: 10px;
+    background: url("./img/clear.png") center no-repeat;
+    background-size: 28px auto;
+    text-indent: -999px;
 }
