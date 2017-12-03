@@ -1,0 +1,11 @@
+/* CSS Document */
+body {
+    width: 100%;
+    padding-top: 100px;
+}
+
+img {
+    margin: 0 auto;
+    display: block;
+    border: solid blue 2px;
+}
