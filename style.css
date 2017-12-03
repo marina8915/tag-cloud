@@ -1,11 +1,84 @@
-/* CSS Document */
+/* RESET DEFAULT STYLES */
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Conv_MyriadPro-Regular', 'Myriad Pro', PT Sans, serif;
+    color: #fff;
+}
+
+div, p, a, span, em, strong, img, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, td, tr, form, fieldset, label, select, checkbox, input, textarea {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    list-style: none;
+}
+
+select, input, textarea {
+    font-size: 10px;
+    color: #fff;
+    vertical-align: middle;
+}
+
+textarea {
+    vertical-align: top;
+}
+
+:focus {
+    outline: none;
+}
+
+input[type=submit] {
+    cursor: pointer;
+}
+
+img, fieldset {
+    border: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a:link, a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* style*/
 body {
     width: 100%;
     padding-top: 100px;
 }
 
-img {
-    margin: 0 auto;
+#tagCloud {
+    position: relative;
     display: block;
+    height: 437px;
+    width: 660px;
     border: solid blue 2px;
+    margin: 0 auto;
+    background: url("./img/img_bg.jpeg") no-repeat;
+
+}
+
+li {
+    position: absolute;
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid #001100;
+    border-radius: 5px;
+    background-color: rgba(34, 34, 34, .30);
+    opacity: .9;
+    white-space: nowrap;
 }
