@@ -8,31 +8,49 @@ var n = 1
 
 for (var i = 0; i < tags.length; i++) {
     var el = document.createElement('li')
-    var del = '<i class="del" id ="' + n + '">close</i>'
-    el.id = 'num' + n++
+    var del = '<i onclick="Del(' + n + ')">close</i>'
+    el.id = n++
     el.innerHTML = tags[i][0] + del
     el.style.left = tags[i][1] + 'px'
     el.style.top = tags[i][2] + 'px'
     tagCloud.insertBefore(el, tagCloud.childNodes[0])
 }
 
-tagCloud.onclick = function (el) {
+function myFunction(el) {
     var elem = el.target || event.srcElement
-    //display del
-    if (isNaN(elem.id)) {
-        var delList = document.getElementById('tagCloud').getElementsByTagName('i')
-        for (var i = 0; i < delList.length; i++) {
-            delList[i].style.display = 'none'
-        }
-        if (elem.id !== 'tagCloud') {
-            elem.querySelector('i').style.display = 'inline-block'
+    if (!isNaN(elem.id) && elem.id) {
+        delDisplayNone()
+        document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
+        elem.onmousedown = function () {
+            elem.style.zIndex = 1000
+            //move
+            tagCloud.onmousemove = function (e) {
+                document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
+                elem.style.left = e.pageX - 100 + 'px'
+                elem.style.top = e.pageY - 100 + 'px'
+            }
+
+            elem.onmouseup = function () {
+                tagCloud.onmousemove = null
+                elem.onmouseup = null
+            }
         }
     }
-    //delete item
-    if (elem.innerHTML === 'close') {
-        console.log(elem.id)
-        var id = 'num' + elem.id
-        var el = document.getElementById(id)
-        el.parentNode.removeChild(el)
+    if (elem.id === 'tagCloud') {
+        delDisplayNone()
+        tagCloud.onmousemove = null
+        elem.onmouseup = null
     }
+}
+
+function delDisplayNone() {
+    var delList = tagCloud.getElementsByTagName('i')
+    for (var i = 0; i < delList.length; i++) {
+        delList[i].style.display = 'none'
+    }
+}
+
+function Del(id) {
+    var el = document.getElementById(id)
+    el.parentNode.removeChild(el)
 }
