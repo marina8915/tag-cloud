@@ -18,28 +18,57 @@ for (var i = 0; i < tags.length; i++) {
 
 function myFunction(el) {
     var elem = el.target || event.srcElement
+    var limits = {
+        top: 0,
+        right: tagCloud.offsetWidth - elem.offsetWidth - 30,
+        bottom: tagCloud.offsetHeight - elem.offsetHeight - 4,
+        left: 0
+    }
     if (!isNaN(elem.id) && elem.id) {
         delDisplayNone()
         document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
         elem.onmousedown = function () {
             elem.style.zIndex = 1000
-            //move
-            tagCloud.onmousemove = function (e) {
+            document.onmousemove = function (e) {
                 document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
-                elem.style.left = e.pageX - 100 + 'px'
-                elem.style.top = e.pageY - 100 + 'px'
-            }
+                var newLocation = {
+                    x: limits.left,
+                    y: limits.top
+                }
+                if (e.pageX > limits.right) {
+                    newLocation.x = limits.right
+                } else if (e.pageX > limits.left) {
+                    newLocation.x = e.pageX
+                }
+                if (newLocation.x === limits.right) {
+                    document.getElementById(elem.id).querySelector('i').style.marginLeft = '0'
+                    document.getElementById(elem.id).querySelector('i').style.marginRight = '10px'
+                    elem.insertBefore(document.getElementById(elem.id).querySelector('i'), elem.childNodes[0])
+                } else {
+                    document.getElementById(elem.id).querySelector('i').style.marginLeft = '10px'
+                    document.getElementById(elem.id).querySelector('i').style.marginRight = '0'
+                    elem.appendChild(document.getElementById(elem.id).querySelector('i'))
 
-            elem.onmouseup = function () {
-                tagCloud.onmousemove = null
-                elem.onmouseup = null
+                }
+                if (e.pageY > limits.bottom) {
+                    newLocation.y = limits.bottom
+                } else if (e.pageY > limits.top) {
+                    newLocation.y = e.pageY
+                }
+                elem.style.left = newLocation.x + 'px';
+                elem.style.top = newLocation.y + 'px';
             }
+        }
+        document.onmouseup = function () {
+            document.onmousemove = null
+            document.onmouseup = null
+
         }
     }
     if (elem.id === 'tagCloud') {
         delDisplayNone()
-        tagCloud.onmousemove = null
-        elem.onmouseup = null
+        document.onmousemove = null
+        document.onmouseup = null
     }
 }
 
