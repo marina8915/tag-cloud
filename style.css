@@ -20,7 +20,7 @@ div, p, a, span, em, strong, img, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd
 }
 
 select, input, textarea {
-    font-size: 10px;
+    font-size: 14px;
     color: #fff;
     vertical-align: middle;
 }
@@ -71,7 +71,7 @@ body {
 
 }
 
-li {
+li, input {
     position: absolute;
     display: inline-block;
     padding: 5px 10px;
@@ -91,4 +91,10 @@ i {
     background: url("./img/clear.png") center no-repeat;
     background-size: 28px auto;
     text-indent: -999px;
+}
+
+@media screen and (max-width: 768px){
+    body{
+        font-size: 20px;
+    }
 }

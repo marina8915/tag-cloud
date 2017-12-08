@@ -4,6 +4,8 @@ var tags = [
     ['New year holidays', 100, 300],
     ['blizzard', 400, 100]
 ]
+
+
 var n = 1
 
 for (var i = 0; i < tags.length; i++) {
@@ -25,6 +27,7 @@ function myFunction(el) {
         left: 0
     }
     if (!isNaN(elem.id) && elem.id) {
+        newTag.style.display = 'none'
         elem.onmousedown = function () {
             elem.style.zIndex = 1000
             document.onmousemove = function (e) {
@@ -58,16 +61,34 @@ function myFunction(el) {
             }
 
         }
+        delDisplayNone()
         document.onmouseup = function () {
             document.onmousemove = null
             document.onmouseup = null
 
         }
-        delDisplayNone()
     }
     if (elem.id === 'tagCloud') {
         document.onmousemove = null
         document.onmouseup = null
+        elem.ondblclick = function (e) {
+            newTag.style.display = 'inline-block'
+            newTag.style.left = e.pageY + 'px'
+            newTag.style.top = e.pageX + 'px'
+            tagCloud.insertBefore(newTag, tagCloud.childNodes[0])
+            newTag.onchange = function (e) {
+                el = document.createElement('li')
+                del = '<i onclick="Del(' + n + ')">close</i>'
+                el.id = n++
+                el.innerHTML = document.getElementById('newTag').value + del
+                el.style.left = newTag.style.left
+                el.style.top = newTag.style.top
+                tagCloud.insertBefore(el, tagCloud.childNodes[0])
+                newTag.style.display = 'none'
+                newTag.value = ''
+            }
+        }
+
     }
 }
 
