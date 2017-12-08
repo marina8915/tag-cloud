@@ -19,14 +19,12 @@ for (var i = 0; i < tags.length; i++) {
 function myFunction(el) {
     var elem = el.target || event.srcElement
     var limits = {
-        top: 0,
+        top: 14,
         right: tagCloud.offsetWidth - elem.offsetWidth - 30,
-        bottom: tagCloud.offsetHeight - elem.offsetHeight - 4,
+        bottom: tagCloud.offsetHeight - elem.offsetHeight / 2 - 4,
         left: 0
     }
     if (!isNaN(elem.id) && elem.id) {
-        delDisplayNone()
-        document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
         elem.onmousedown = function () {
             elem.style.zIndex = 1000
             document.onmousemove = function (e) {
@@ -56,17 +54,18 @@ function myFunction(el) {
                     newLocation.y = e.pageY
                 }
                 elem.style.left = newLocation.x + 'px';
-                elem.style.top = newLocation.y + 'px';
+                elem.style.top = newLocation.y - elem.offsetHeight / 2 + 'px';
             }
+
         }
         document.onmouseup = function () {
             document.onmousemove = null
             document.onmouseup = null
 
         }
+        delDisplayNone()
     }
     if (elem.id === 'tagCloud') {
-        delDisplayNone()
         document.onmousemove = null
         document.onmouseup = null
     }

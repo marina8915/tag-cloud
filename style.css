@@ -58,11 +58,10 @@ a:hover {
 /* style*/
 body {
     width: 100%;
-    padding-top: 100px;
 }
 
 #tagCloud {
-    position: relative;
+    position: absolute;
     display: block;
     height: 437px;
     width: 660px;
