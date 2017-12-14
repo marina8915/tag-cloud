@@ -93,7 +93,7 @@ function cloud(el) {
             tagCloud.insertBefore(newTag, tagCloud.childNodes[0])
             newTag.onchange = function () {
                 el = document.createElement('li')
-                del = '<i onclick="Del(' + n + ')">close</i>'
+                del = '<i onclick="deleteTag(' + n + ')">close</i>'
                 el.id = n++
                 el.innerHTML = document.getElementById('newTag').value + del
                 el.style.left = newTag.style.left
