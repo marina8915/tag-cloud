@@ -83,6 +83,10 @@ li, input {
     cursor: pointer;
 }
 
+input{
+    width: 100px;
+}
+
 i {
     display: none;
     height: 16px;
