@@ -6,6 +6,7 @@ var tags = [
 ]
 
 var n = 1
+var prev = 0
 
 for (var i = 0; i < tags.length; i++) {
     var el = document.createElement('li')
@@ -25,10 +26,14 @@ function cloud(el) {
         bottom: tagCloud.offsetHeight - elem.offsetHeight / 2 - 4,
         left: 0
     }
+	delVisible(prev, elem.id)
     if (!isNaN(elem.id) && elem.id) {
         newTag.style.display = 'none'
+		prev = elem.id
+		document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
         elem.onmousedown = function () {
             elem.style.zIndex = 1000
+			document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
             document.onmousemove = function (e) {
                 document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
                 var newLocation = {
@@ -58,11 +63,8 @@ function cloud(el) {
                 elem.style.top = newLocation.y - elem.offsetHeight / 2 + 'px';
             }
         }
-        var delList = tagCloud.getElementsByTagName('i')
-        for (var i = 0; i < delList.length; i++) {
-            delList[i].style.display = 'none'
-        }
         document.onmouseup = function () {
+			document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
             document.onmousemove = null
             document.onmouseup = null
         }
@@ -106,7 +108,14 @@ function cloud(el) {
     }
 }
 
+function delVisible(prev, next) {
+	if (prev != next && prev != 0) {
+		document.getElementById(prev).querySelector('i').style.display = 'none'
+	}
+}
+
 function deleteTag(id) {
     var el = document.getElementById(id)
     el.parentNode.removeChild(el)
+	prev = 0
 }
