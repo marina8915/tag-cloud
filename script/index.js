@@ -28,12 +28,11 @@ function cloud(el) {
     }
 	delVisible(prev, elem.id)
     if (!isNaN(elem.id) && elem.id) {
-        newTag.style.display = 'none'
+		newTag.style.display = 'none'
 		prev = elem.id
 		document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
         elem.onmousedown = function () {
             elem.style.zIndex = 1000
-			document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
             document.onmousemove = function (e) {
                 document.getElementById(elem.id).querySelector('i').style.display = 'inline-block'
                 var newLocation = {
@@ -73,6 +72,10 @@ function cloud(el) {
         document.onmousemove = null
         document.onmouseup = null
         elem.ondblclick = function (e) {
+		var delList = tagCloud.getElementsByTagName('i')
+        for (var i = 0; i < delList.length; i++) {
+            delList[i].style.display = 'none'
+        }
             var limitNew = {
                 left: 664  - 90,
                 top: 437  - 30,
@@ -119,3 +122,4 @@ function deleteTag(id) {
     el.parentNode.removeChild(el)
 	prev = 0
 }
+
